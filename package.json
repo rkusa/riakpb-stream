@@ -1,0 +1,33 @@
+{
+  "name": "riakpb-stream",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "lib/",
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rkusa/riakpb-stream.git"
+  },
+  "author": "Markus Ast <npm.m@rkusa.st>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rkusa/riakpb-stream/issues"
+  },
+  "homepage": "https://github.com/rkusa/riakpb-stream",
+  "dependencies": {
+    "node-protobuf": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^0.6.2",
+    "frame-stream": "^0.1.1",
+    "gulp": "^3.6.2",
+    "gulp-eslint": "^0.1.7",
+    "gulp-mocha": "^0.4.1"
+  },
+  "engines": {
+    "node": ">=0.10"
+  }
+}
