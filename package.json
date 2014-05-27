@@ -1,8 +1,8 @@
 {
   "name": "riakpb-stream",
-  "version": "0.0.0",
-  "description": "",
-  "keywords": [],
+  "version": "0.1.0",
+  "description": "Node.js streams for Riak Protocol Buffer Messages.",
+  "keywords": ["protobuf", "protocol buffer", "riak", "stream"],
   "main": "lib/",
   "scripts": {
     "test": "gulp"
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "eslint": "^0.6.2",
-    "frame-stream": "^0.1.1",
+    "frame-stream": "^0.2.0",
     "gulp": "^3.6.2",
     "gulp-eslint": "^0.1.7",
     "gulp-mocha": "^0.4.1"

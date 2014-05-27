@@ -14,9 +14,9 @@ var server
 setup(function(done) {
   // mock riak
   server = net.createServer(function(socket) {
-    var framer = new frame.FramerStream()
+    var prefixer = frame.prefix()
 
-    framer
+    prefixer
     .pipe(socket)
     .pipe(frame())
     .pipe(through({}, function(chunk, enc, cont) {
@@ -25,14 +25,14 @@ setup(function(done) {
         case 1: // RpbPingReq
           message = new Buffer(1)
           message.writeInt8(2, 0)
-          framer.write(message)
+          prefixer.write(message)
           break
         case 17: // RpbListKeysReq
           var body = messages.serialize({ keys: ['a', 'b'], done: true }, 'RpbListKeysResp')
           message = new Buffer(body.length + 1)
           message.writeInt8(18, 0)
           body.copy(message, 1)
-          framer.write(message)
+          prefixer.write(message)
           break
       }
       cont()
@@ -56,7 +56,7 @@ test('message without content', function(done) {
     var parser = new riak.Parser
 
     serializer
-    .pipe(new frame.FramerStream())
+    .pipe(frame.prefix())
     .pipe(socket)
     .pipe(frame())
     .pipe(parser)
@@ -77,7 +77,7 @@ test('message with content', function(done) {
     var parser = new riak.Parser
 
     serializer
-    .pipe(new frame.FramerStream())
+    .pipe(frame.prefix())
     .pipe(socket)
     .pipe(frame())
     .pipe(parser)

@@ -1,10 +1,36 @@
 # riakpb-stream
 
+Node.js streams for Riak Protocol Buffer Messages.
+
 [![NPM][npm]](https://npmjs.org/package/riakpb-stream)
 [![Build Status](travis)](http://travis-ci.org/rkusa/riakpb-stream)
 [![Dependency Status][deps]](https://david-dm.org/rkusa/riakpb-stream)
 
 [riak_pb](https://github.com/basho/riak_pb) version [`2.0.0.15`](https://github.com/basho/riak_pb/tree/2.0.0.15)
+
+## Usage
+
+```js
+var net = require('net')
+var stream = require('stream')
+var frame = require('frame-stream')
+var riak = require('riakpb-stream')
+
+var socket = net.connect(8087, function() {
+  var serializer = new riak.Serializer
+  var parser = new riak.Parser
+
+  serializer.pipe(frame.prefix()) // (*)
+            .pipe(socket)
+            .pipe(frame()) // (*)
+            .pipe(parser)
+            .pipe(...)
+
+  serializer.write({ bucket: 'test' }, 'RpbListKeysReq')
+})
+```
+
+`(*)` important for length-prefix framing (prepend message length)
 
 ## MIT License
 
